@@ -1,35 +1,29 @@
 package com.example.app;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
-
-import androidx.activity.EdgeToEdge;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.lifecycle.ViewModelProvider;
-
-import com.example.appbiblioteis.API.models.Book;
-import com.example.appbiblioteis.API.repository.BookRepository;
 
 
 public class MainActivity extends AppCompatActivity {
 
+    Button btnListLibrons;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+
+        btnListLibrons = findViewById(R.id.btnListaLibros);
+
+        btnListLibrons.setOnClickListener(v -> {
+            Intent i = new Intent(v.getContext(), BookListActivity.class);
+            startActivity(i);
         });
 
-
-
+        /*
         MainActivityVM vm = new ViewModelProvider(this).get(MainActivityVM.class);
 
         vm.book.observe(this, (Book book) -> {
@@ -49,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(Throwable t) {
 
             }
-        });
+        });*/
 
     }
 }

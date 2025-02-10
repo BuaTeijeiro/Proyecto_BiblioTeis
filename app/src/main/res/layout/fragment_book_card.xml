@@ -2,13 +2,16 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".BookCard">
+    android:layout_height="wrap_content"
+    tools:context=".BookCard"
+    android:layout_margin="10dp">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/txtTitulo"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="20dp"
+        android:background="#FFFF00"
+        android:text="" />
 
 </FrameLayout>

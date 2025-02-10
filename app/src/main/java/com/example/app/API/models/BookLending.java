@@ -1,4 +1,4 @@
-package com.example.appbiblioteis.API.models;
+package com.example.app.API.models;
 
 public class BookLending {
     private int id;

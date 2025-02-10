@@ -1,10 +1,10 @@
-package com.example.appbiblioteis.API.repository;
+package com.example.app.API.repository;
 
 import android.util.Log;
 
-import com.example.appbiblioteis.API.models.User;
-import com.example.appbiblioteis.API.retrofit.ApiClient;
-import com.example.appbiblioteis.API.retrofit.ApiService;
+import com.example.app.API.models.User;
+import com.example.app.API.retrofit.ApiClient;
+import com.example.app.API.retrofit.ApiService;
 
 import java.util.List;
 
