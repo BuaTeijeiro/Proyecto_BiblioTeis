@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
     Button btnListLibrons;
+    Button btnLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,9 +18,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btnListLibrons = findViewById(R.id.btnListaLibros);
+        btnLogin = findViewById(R.id.btnLogin);
 
         btnListLibrons.setOnClickListener(v -> {
             Intent i = new Intent(v.getContext(), BookListActivity.class);
+            startActivity(i);
+        });
+
+        btnLogin.setOnClickListener(v -> {
+            Intent i = new Intent(v.getContext(), LogInActivity.class);
             startActivity(i);
         });
 

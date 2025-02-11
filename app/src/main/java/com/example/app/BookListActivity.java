@@ -1,6 +1,9 @@
 package com.example.app;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,20 +23,23 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BookListActivity extends AppCompatActivity {
 
     RecyclerView rv;
     TextView txtView;
+    EditText etBuscador;
+    Button btnBuscar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_list);
 
-        rv = findViewById(R.id.rvBookList);
+        inicializarViews();
+
         rv.setLayoutManager(new LinearLayoutManager(this));
-        txtView = findViewById(R.id.textView);
 
         MainActivityVM viewModel = new ViewModelProvider(this).get(MainActivityVM.class);
 
@@ -55,5 +61,20 @@ public class BookListActivity extends AppCompatActivity {
             }
         });
 
+        btnBuscar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String criterioBusqueda = etBuscador.getText().toString();
+                rv.setAdapter(new BookListAdapter(viewModel.books.getValue().stream().filter(o -> o.getTitle().contains(criterioBusqueda) || o.getAuthor().contains(criterioBusqueda)).collect(Collectors.toList())));
+            }
+        });
+
+    }
+
+    public void inicializarViews(){
+        rv = findViewById(R.id.rvBookList);
+        txtView = findViewById(R.id.textView);
+        etBuscador = findViewById(R.id.etBuscador);
+        btnBuscar = findViewById(R.id.btnBuscar);
     }
 }

@@ -3,6 +3,7 @@ package com.example.app.API.retrofit;
 import com.example.app.API.models.Book;
 import com.example.app.API.models.BookLending;
 import com.example.app.API.models.User;
+import com.example.app.dto.LogInDto;
 
 import java.util.List;
 
@@ -43,6 +44,9 @@ public interface ApiService {
 
     @DELETE("users/{id}")
     Call<Void> deleteUser(@Path("id") int id);
+
+    @POST("users/login")
+    Call<User> checkLogin(@Body LogInDto logInDto);
 
     // Book Lending Endpoints
     @GET("booklending")

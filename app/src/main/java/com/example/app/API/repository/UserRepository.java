@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.app.API.models.User;
 import com.example.app.API.retrofit.ApiClient;
 import com.example.app.API.retrofit.ApiService;
+import com.example.app.dto.LogInDto;
 
 import java.util.List;
 
@@ -89,6 +90,20 @@ public class UserRepository {
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 Log.e("UserRepository", "Error deleting user", t);
+                callback.onFailure(t);
+            }
+        });
+    }
+
+    public void checkUser(String email, String password, final BookRepository.ApiCallback<User> callback) {
+        apiService.checkLogin(new LogInDto(email, password)).enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                callback.onSuccess(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
                 callback.onFailure(t);
             }
         });
