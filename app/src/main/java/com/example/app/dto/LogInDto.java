@@ -1,23 +1,23 @@
 package com.example.app.dto;
 
 public class LogInDto {
-    private String emal;
+    private String email;
     private String password;
 
     public LogInDto() {
     }
 
-    public LogInDto(String emal, String password) {
-        this.emal = emal;
+    public LogInDto(String email, String password) {
+        this.email = email;
         this.password = password;
     }
 
-    public String getEmal() {
-        return emal;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEmal(String emal) {
-        this.emal = emal;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {

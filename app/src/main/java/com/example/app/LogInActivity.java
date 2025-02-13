@@ -35,13 +35,16 @@ public class LogInActivity extends AppCompatActivity {
                             Toast.makeText(LogInActivity.this, "El usuario y contraseña no coinciden", Toast.LENGTH_SHORT).show();
                             etPassword.setText("");
                         } else {
-                            Toast.makeText(LogInActivity.this, "Se ha logeado el usuario", Toast.LENGTH_SHORT).show();
+                            UserLogIn userLogIn = new UserLogIn();
+                            userLogIn.setLoggedUser(result);
+                            finish();
                         }
                     }
 
                     @Override
                     public void onFailure(Throwable t) {
-
+                        Toast.makeText(LogInActivity.this, "El usuario y contraseña no coinciden", Toast.LENGTH_SHORT).show();
+                        etPassword.setText("");
                     }
                 });
             }
@@ -50,7 +53,6 @@ public class LogInActivity extends AppCompatActivity {
         btnCancelarLogin.setOnClickListener(v->{
             finish();
         });
-
     }
 
     public void inicializarViews(){

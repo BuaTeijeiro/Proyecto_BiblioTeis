@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.app.API.models.BookLending;
 import com.example.app.API.retrofit.ApiClient;
 import com.example.app.API.retrofit.ApiService;
+import com.example.app.dto.BookLendingForm;
 
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class BookLendingRepository {
         });
     }
 
-    public void lendBook(BookLending lending, final BookRepository.ApiCallback<Boolean> callback) {
+    public void lendBook(BookLendingForm lending, final BookRepository.ApiCallback<Boolean> callback) {
         apiService.lendBook(lending).enqueue(new Callback<BookLending>() {
             @Override
             public void onResponse(Call<BookLending> call, Response<BookLending> response) {

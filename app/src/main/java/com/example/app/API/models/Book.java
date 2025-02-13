@@ -78,4 +78,8 @@ public class Book {
     public void setBookPicture(String bookPicture) {
         this.bookPicture = bookPicture;
     }
+
+    public User getCurrentUser(){
+        return null;
+    }
 }

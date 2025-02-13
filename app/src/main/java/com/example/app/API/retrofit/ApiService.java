@@ -3,6 +3,7 @@ package com.example.app.API.retrofit;
 import com.example.app.API.models.Book;
 import com.example.app.API.models.BookLending;
 import com.example.app.API.models.User;
+import com.example.app.dto.BookLendingForm;
 import com.example.app.dto.LogInDto;
 
 import java.util.List;
@@ -56,7 +57,7 @@ public interface ApiService {
     Call<BookLending> getLending(@Path("id") int id);
 
     @POST("booklending")
-    Call<BookLending> lendBook(@Body BookLending lending);
+    Call<BookLending> lendBook(@Body BookLendingForm lending);
 
     @PUT("booklending/{id}/return")
     Call<Void> returnBook(@Path("id") int id);

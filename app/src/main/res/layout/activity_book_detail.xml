@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:gravity="center">
 
   <TextView
       android:id="@+id/txtTitulo"
@@ -13,5 +14,20 @@
       android:id="@+id/txtISBN"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"/>
+  <Button
+      android:id="@+id/btnTomarPrestado"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Tomar Prestado"/>
+  <Button
+      android:id="@+id/btnDevolver"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Devolver"/>
+  <TextView
+      android:id="@+id/tvMensajePrestamo"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Logéase para realizar préstamos"/>
 
   </LinearLayout>

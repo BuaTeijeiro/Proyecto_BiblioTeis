@@ -1,6 +1,7 @@
 package com.example.app.API.models;
 
 import java.util.List;
+import java.util.Objects;
 
 public class User {
     private int id;
@@ -68,5 +69,18 @@ public class User {
 
     public void setProfilePicture(String profilePicture) {
         this.profilePicture = profilePicture;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }
