@@ -1,6 +1,12 @@
 package com.example.app.API.models;
 
+import android.content.ContentUris;
+
+import com.example.app.API.repository.BookLendingRepository;
+import com.example.app.API.repository.BookRepository;
+
 import java.util.List;
+import java.util.Optional;
 
 public class Book {
     private int id;
@@ -79,7 +85,10 @@ public class Book {
         this.bookPicture = bookPicture;
     }
 
-    public User getCurrentUser(){
-        return null;
+    public BookLending getCurrentLending(){
+        BookLendingRepository blr = new BookLendingRepository();
+        Optional<BookLending> optionalBookLending = getBookLendings().stream().filter(o -> o.getReturnDate() == null).findFirst();
+        return optionalBookLending.orElse(null);
     }
+
 }

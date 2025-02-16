@@ -7,20 +7,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.app.API.models.Book;
 import com.example.app.API.models.BookLending;
-import com.example.app.API.models.User;
 import com.example.app.API.repository.BookLendingRepository;
 import com.example.app.API.repository.BookRepository;
 import com.example.app.dto.BookLendingForm;
-
-import java.util.List;
 
 public class BookDetailActivity extends AppCompatActivity {
 
@@ -41,20 +34,7 @@ public class BookDetailActivity extends AppCompatActivity {
         Intent i = getIntent();
         int id = i.getIntExtra(BookListAdapter.ID_LIBRO, 0);
 
-        BookRepository bookRepository = new BookRepository();
-
-        bookRepository.getBookById(id, new BookRepository.ApiCallback<Book>() {
-            @Override
-            public void onSuccess(Book result) {
-                setBook(result);
-            }
-
-            @Override
-            public void onFailure(Throwable t) {
-                Toast.makeText(BookDetailActivity.this, "No se ha podido cargar el libro", Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        });
+        searchBook(id);
 
         BookLendingRepository bookLendingRepository = new BookLendingRepository();
 
@@ -78,6 +58,22 @@ public class BookDetailActivity extends AppCompatActivity {
             });
         });
 
+        btnDevolver.setOnClickListener( v ->{
+            bookLendingRepository.returnBook(book.getCurrentLending().getId(), new BookRepository.ApiCallback<Boolean>() {
+                @Override
+                public void onSuccess(Boolean result) {
+                    if (result){
+                        searchBook(book.getId());
+                    }
+                }
+
+                @Override
+                public void onFailure(Throwable t) {
+
+                }
+            });
+        });
+
     }
 
     public void inicializarViews(){
@@ -92,21 +88,48 @@ public class BookDetailActivity extends AppCompatActivity {
         this.book = book;
         txtTitulo.setText(book.getTitle());
         txtISBN.setText(book.getIsbn());
+        reloadViews();
+    }
+
+    private void searchBook(int id) {
+        BookRepository bookRepository = new BookRepository();
+
+        bookRepository.getBookById(id, new BookRepository.ApiCallback<Book>() {
+            @Override
+            public void onSuccess(Book result) {
+                setBook(result);
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                Toast.makeText(BookDetailActivity.this, "No se ha podido cargar el libro", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
+    }
+
+    private void reloadViews() {
         if (userLogIn.getLoggedUser() != null) {
-            tvMensajePrestamo.setVisibility(View.GONE);
+            BookLending lending = book.getCurrentLending();
             if (book.isAvailable()) {
                 btnTomarPrestado.setVisibility(View.VISIBLE);
+                tvMensajePrestamo.setVisibility(View.GONE);
                 btnDevolver.setVisibility(View.GONE);
+            } else if(lending!= null && lending.getUserId() == userLogIn.getLoggedUser().getId()) {
+                btnTomarPrestado.setVisibility(View.GONE);
+                tvMensajePrestamo.setVisibility(View.GONE);
+                btnDevolver.setVisibility(View.VISIBLE);
             } else {
                 btnTomarPrestado.setVisibility(View.GONE);
                 btnDevolver.setVisibility(View.GONE);
-
+                tvMensajePrestamo.setText("El libro se halla prestado");
+                tvMensajePrestamo.setVisibility(View.VISIBLE);
             }
         } else {
             btnTomarPrestado.setVisibility(View.GONE);
             btnDevolver.setVisibility(View.GONE);
+            tvMensajePrestamo.setText("Logéese para realizar préstamos");
             tvMensajePrestamo.setVisibility(View.VISIBLE);
         }
-
     }
 }

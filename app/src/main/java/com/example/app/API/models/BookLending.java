@@ -1,5 +1,7 @@
 package com.example.app.API.models;
 
+import java.time.LocalDate;
+
 public class BookLending {
     private int id;
     private int bookId;
@@ -52,4 +54,10 @@ public class BookLending {
     public void setReturnDate(String returnDate) {
         this.returnDate = returnDate;
     }
+
+//    public String computeReturnDate(){
+//        String[] period = getLendDate().substring(0,10).split("-");
+//        LocalDate date = LocalDate.of(Integer.parseInt(period[0]), Integer.parseInt(period[1]), Integer.parseInt(period[2]));
+//        date.plusDays(15);
+//    }
 }
