@@ -44,8 +44,7 @@ public class BookDetailActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(Boolean result) {
                     if (result){
-                        btnTomarPrestado.setVisibility(View.GONE);
-                        btnDevolver.setVisibility(View.VISIBLE);
+                        searchBook(book.getId());
                     } else {
                         Toast.makeText(BookDetailActivity.this, "La API ha devuelto false", Toast.LENGTH_SHORT).show();
                     }
