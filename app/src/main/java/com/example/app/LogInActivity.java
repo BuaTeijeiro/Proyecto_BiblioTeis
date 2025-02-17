@@ -58,6 +58,8 @@ public class LogInActivity extends AppCompatActivity {
     public void inicializarViews(){
         etPassword = findViewById(R.id.etPassword);
         etEmail = findViewById(R.id.etEmail);
+        etPassword.setText("hashedpassword2");
+        etEmail.setText("bob@example.com");
         btnLogin = findViewById(R.id.btnCheckLogin);
         btnCancelarLogin = findViewById(R.id.btnCancelarLogin);
     }

@@ -1,6 +1,8 @@
 package com.example.app;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -10,6 +12,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app.API.models.Book;
@@ -19,6 +22,7 @@ import com.example.app.API.repository.BookLendingRepository;
 import com.example.app.API.repository.BookRepository;
 import com.example.app.API.repository.UserRepository;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,6 +43,7 @@ public class ProfileActivity extends AppCompatActivity {
         UserRepository userRepository = new UserRepository();
 
         viewModel = new ViewModelProvider(this).get(ProfileVM.class);
+        rvBookLendingList.setLayoutManager(new LinearLayoutManager(this));
         viewModel.lendings.observe(this, (List<BookLending> lendings) -> {
             rvBookLendingList.setAdapter(new LendingListAdapter(lendings));
         });
@@ -64,19 +69,17 @@ public class ProfileActivity extends AppCompatActivity {
             tvNombreUsuario.setText(userToLoad.getName());
             tvEmailUsuario.setText(userToLoad.getEmail());
             tvFechaUsuario.setText(userToLoad.getDateJoined());
+
             bookLendingRepository.getAllLendings(new BookRepository.ApiCallback<List<BookLending>>() {
                 @Override
                 public void onSuccess(List<BookLending> result) {
-                    List<BookLending> lendingsUser = result.stream().filter(o -> o.getUserId() == user.getId()).collect(Collectors.toList());
+                    List<BookLending> lendingsUser = result.stream().filter(o -> o.getUserId() == user.getId()).sorted(Comparator.reverseOrder()).collect(Collectors.toList());
                     viewModel.lendings.setValue(lendingsUser);
                 }
-
                 @Override
                 public void onFailure(Throwable t) {
-
                 }
             });
-
         }
     }
 

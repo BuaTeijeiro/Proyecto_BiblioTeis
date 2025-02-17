@@ -1,5 +1,6 @@
 package com.example.app;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,11 +34,24 @@ public class LendingListAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         LendingCardViewHolder viewHolder = (LendingCardViewHolder) holder;
         BookLending lending = lendings.get(position);
-        viewHolder.getTxtFechaPrestado().setText(lending.getLendDate());
+        viewHolder.getTxtFechaPrestado().setText(lending.getDateString(lending.getLendDate()));
+        if (lending.getReturnDate() == null) {
+            if (lending.isLate()){
+                viewHolder.getTxtDevolucion().setText("El libro tendría que haber sido devuelto en la fecha " + lending.getDueDate());
+                viewHolder.getView().setBackgroundColor(viewHolder.getView().getResources().getColor(R.color.red));
+            } else {
+                viewHolder.getTxtDevolucion().setText("El libro debe ser devuelto antes de la fecha " + lending.getDueDate());
+                viewHolder.getView().setBackgroundColor(viewHolder.getView().getResources().getColor(R.color.green));
+            }
+        } else {
+            viewHolder.getTxtDevolucion().setText("El libro fue devuelto en la fecha " + lending.getDateString(lending.getReturnDate()));
+            viewHolder.getView().setBackgroundColor(viewHolder.getView().getResources().getColor(R.color.blue));
+
+        }
         bookRepository.getBookById(lending.getBookId(), new BookRepository.ApiCallback<Book>() {
             @Override
             public void onSuccess(Book result) {
-                viewHolder.getTxtFechaPrestado().setText(result.getTitle());
+                viewHolder.getTxtTituloLibro().setText(result.getTitle());
             }
 
             @Override

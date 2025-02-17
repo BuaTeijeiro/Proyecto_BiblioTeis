@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class LendingCardViewHolder extends RecyclerView.ViewHolder {
 
-    TextView txtTituloLibro, txtFechaPrestado;
+    TextView txtTituloLibro, txtFechaPrestado, txtDevolucion;
     View view;
 
     public LendingCardViewHolder(View view){
@@ -15,6 +15,7 @@ public class LendingCardViewHolder extends RecyclerView.ViewHolder {
         this.view = view;
         txtTituloLibro = view.findViewById(R.id.txtTituloLibro);
         txtFechaPrestado = view.findViewById(R.id.txtFechaPrestado);
+        txtDevolucion = view.findViewById(R.id.txtDevolucion);
     }
 
     public View getView() {
@@ -35,6 +36,14 @@ public class LendingCardViewHolder extends RecyclerView.ViewHolder {
 
     public TextView getTxtFechaPrestado() {
         return txtFechaPrestado;
+    }
+
+    public TextView getTxtDevolucion() {
+        return txtDevolucion;
+    }
+
+    public void setTxtDevolucion(TextView txtDevolucion) {
+        this.txtDevolucion = txtDevolucion;
     }
 
     public void setTxtFechaPrestado(TextView txtFechaPrestado) {

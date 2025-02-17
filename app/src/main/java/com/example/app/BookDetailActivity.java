@@ -121,7 +121,7 @@ public class BookDetailActivity extends AppCompatActivity {
             } else {
                 btnTomarPrestado.setVisibility(View.GONE);
                 btnDevolver.setVisibility(View.GONE);
-                tvMensajePrestamo.setText("El libro se halla prestado");
+                tvMensajePrestamo.setText(String.format("El libro se halla prestado.\n Será devuelto el día %s.\n Si ha pasado esa fecha, espera a que la biblioteca le indique que ha sido devuelto", lending.getDueDate()));
                 tvMensajePrestamo.setVisibility(View.VISIBLE);
             }
         } else {
