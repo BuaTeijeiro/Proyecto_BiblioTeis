@@ -1,17 +1,18 @@
 package com.example.app;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,9 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.app.API.models.Book;
 import com.example.app.API.repository.BookRepository;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,6 +30,8 @@ public class BookListActivity extends AppCompatActivity {
     TextView txtView;
     EditText etBuscador;
     Button btnBuscar;
+    ImageButton btnCamara;
+    ActivityResultLauncher<Uri> intentQR;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,14 @@ public class BookListActivity extends AppCompatActivity {
 
         viewModel.books.observe(this, (List<Book> books) -> {
             rv.setAdapter(new BookListAdapter(books));
+        });
+
+        intentQR = registerForActivityResult(new ActivityResultContracts.TakePicture(), result -> {
+            Toast.makeText(this, "Se ha sacado una foto", Toast.LENGTH_SHORT).show();
+        });
+
+        btnCamara.setOnClickListener(v -> {
+            intentQR.launch(Uri.EMPTY);
         });
 
         BookRepository repository = new BookRepository();
@@ -76,5 +85,6 @@ public class BookListActivity extends AppCompatActivity {
         txtView = findViewById(R.id.textView);
         etBuscador = findViewById(R.id.etBuscador);
         btnBuscar = findViewById(R.id.btnBuscar);
+        btnCamara = findViewById(R.id.btnCamara);
     }
 }

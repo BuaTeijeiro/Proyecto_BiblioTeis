@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,6 +23,7 @@ public class BookListAdapter extends RecyclerView.Adapter {
     public static final String ID_LIBRO = "idLibro";
     List<Book> books;
     ImageRepository imageRepository = new ImageRepository();
+
 
     public BookListAdapter(List<Book> books){
         this.books = books;
