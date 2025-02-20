@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class BookLending implements Comparable<BookLending>{
-    public static final int LENDING_PERIOD = 15;
+    public static final int LENDING_PERIOD = 2;
     private int id;
     private int bookId;
     private int userId;
@@ -93,7 +93,8 @@ public class BookLending implements Comparable<BookLending>{
     public int compareTo(BookLending other) {
         if (getReturnDate() == null){
             if (other.getReturnDate() == null){
-                return computeDueDate().compareTo(other.computeDueDate());
+                return -computeDueDate().compareTo(other.computeDueDate());
+                //si ninguno ha sido devuelto, pongo primero el que tiene que ser devuelto antes
             } else {
                 return 1;
             }
@@ -103,6 +104,7 @@ public class BookLending implements Comparable<BookLending>{
                 return -1;
             } else {
                 return getDateFormat(getReturnDate()).compareTo(other.getDateFormat(other.getReturnDate()));
+                //si ambos han sido devueltos, pongo primero el que fue devuelto de último
             }
         }
     }

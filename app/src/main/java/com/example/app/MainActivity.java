@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.app.API.models.User;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends PlantillaActivity {
 
     Button btnListLibrons;
     Button btnLogin, btnLogOut, btnPerfil;
