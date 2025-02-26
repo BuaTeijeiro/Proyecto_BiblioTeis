@@ -3,7 +3,9 @@ package com.example.app;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -11,27 +13,33 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MenuProvider;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app.API.models.Book;
 import com.example.app.API.repository.BookRepository;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
-import java.net.URI;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class BookListActivity extends AppCompatActivity {
+public class BookListActivity extends ResumableActivity {
 
     RecyclerView rv;
     TextView txtView;
     EditText etBuscador;
     Button btnBuscar;
     ImageButton btnCamara;
+    Toolbar toolbar;
     ActivityResultLauncher<Uri> intentQR;
+    UserLogIn userLogIn = new UserLogIn();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,20 +48,15 @@ public class BookListActivity extends AppCompatActivity {
 
         inicializarViews();
 
-        rv.setLayoutManager(new LinearLayoutManager(this));
+        setSupportActionBar(toolbar);
+
+        addMenuProvider(new MyMenuProvider(this));
 
         MainActivityVM viewModel = new ViewModelProvider(this).get(MainActivityVM.class);
 
+        rv.setLayoutManager(new LinearLayoutManager(this));
         viewModel.books.observe(this, (List<Book> books) -> {
             rv.setAdapter(new BookListAdapter(books));
-        });
-
-        intentQR = registerForActivityResult(new ActivityResultContracts.TakePicture(), result -> {
-            Toast.makeText(this, "Se ha sacado una foto", Toast.LENGTH_SHORT).show();
-        });
-
-        btnCamara.setOnClickListener(v -> {
-            intentQR.launch(Uri.EMPTY);
         });
 
         BookRepository repository = new BookRepository();
@@ -70,21 +73,20 @@ public class BookListActivity extends AppCompatActivity {
             }
         });
 
-        btnBuscar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String criterioBusqueda = etBuscador.getText().toString();
-                rv.setAdapter(new BookListAdapter(viewModel.books.getValue().stream().filter(o -> o.getTitle().contains(criterioBusqueda) || o.getAuthor().contains(criterioBusqueda)).collect(Collectors.toList())));
-            }
+        btnBuscar.setOnClickListener(v -> {
+            String criterioBusqueda = etBuscador.getText().toString();
+            rv.setAdapter(new BookListAdapter(viewModel.books.getValue().stream().filter(o -> o.getTitle().contains(criterioBusqueda) || o.getAuthor().contains(criterioBusqueda)).collect(Collectors.toList())));
         });
 
     }
+
+
 
     public void inicializarViews(){
         rv = findViewById(R.id.rvBookList);
         txtView = findViewById(R.id.textView);
         etBuscador = findViewById(R.id.etBuscador);
         btnBuscar = findViewById(R.id.btnBuscar);
-        btnCamara = findViewById(R.id.btnCamara);
+        toolbar = findViewById(R.id.toolbar);
     }
 }

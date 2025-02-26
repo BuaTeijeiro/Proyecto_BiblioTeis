@@ -2,20 +2,27 @@ package com.example.app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MenuProvider;
 
 import com.example.app.API.models.Book;
 import com.example.app.API.models.BookLending;
+import com.example.app.API.models.User;
 import com.example.app.API.repository.BookLendingRepository;
 import com.example.app.API.repository.BookRepository;
 import com.example.app.dto.BookLendingForm;
 
-public class BookDetailActivity extends AppCompatActivity {
+public class BookDetailActivity extends ResumableActivity {
 
     TextView txtTitulo;
     TextView txtISBN;
@@ -23,6 +30,7 @@ public class BookDetailActivity extends AppCompatActivity {
     Button btnTomarPrestado, btnDevolver;
     UserLogIn userLogIn = new UserLogIn();
     Book book;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +38,9 @@ public class BookDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_book_detail);
 
         inicializarViews();
+
+        setSupportActionBar(toolbar);
+        addMenuProvider(new MyMenuProvider(this));
 
         Intent i = getIntent();
         int id = i.getIntExtra(BookListAdapter.ID_LIBRO, 0);
@@ -81,6 +92,7 @@ public class BookDetailActivity extends AppCompatActivity {
         btnDevolver = findViewById(R.id.btnDevolver);
         btnTomarPrestado = findViewById(R.id.btnTomarPrestado);
         tvMensajePrestamo = findViewById(R.id.tvMensajePrestamo);
+        toolbar = findViewById(R.id.toolbar);
     }
 
     public void setBook(Book book){
@@ -130,5 +142,11 @@ public class BookDetailActivity extends AppCompatActivity {
             tvMensajePrestamo.setText("Logéese para realizar préstamos");
             tvMensajePrestamo.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        reloadViews();
     }
 }

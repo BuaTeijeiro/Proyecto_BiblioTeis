@@ -1,21 +1,23 @@
 package com.example.app;
 
-import android.content.Context;
+
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.LinearLayout;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MenuProvider;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.app.API.models.Book;
 import com.example.app.API.models.BookLending;
 import com.example.app.API.models.User;
 import com.example.app.API.repository.BookLendingRepository;
@@ -26,7 +28,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends ResumableActivity {
 
     TextView tvNombreUsuario, tvEmailUsuario, tvFechaUsuario;
     UserLogIn userLogIn = new UserLogIn();
@@ -34,12 +36,17 @@ public class ProfileActivity extends AppCompatActivity {
     User user;
     BookLendingRepository bookLendingRepository = new BookLendingRepository();
     ProfileVM viewModel;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
         inicializarViews();
+        setSupportActionBar(toolbar);
+        addMenuProvider(new MyMenuProvider(this));
+
         UserRepository userRepository = new UserRepository();
 
         viewModel = new ViewModelProvider(this).get(ProfileVM.class);
@@ -83,10 +90,19 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        if (userLogIn.getLoggedUser() == null){
+            finish();
+        }
+    }
+
     private void inicializarViews(){
         tvEmailUsuario = findViewById(R.id.tvEmailUsuario);
         tvNombreUsuario = findViewById(R.id.tvNombreUsuario);
         tvFechaUsuario = findViewById(R.id.tvFechaUsuario);
         rvBookLendingList = findViewById(R.id.rvBookLendingList);
+        toolbar = findViewById(R.id.toolbar);
     }
 }

@@ -1,33 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:id="@+id/main"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:gravity="center">
 
-  <TextView
-      android:id="@+id/txtTitulo"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"/>
-  <TextView
-      android:id="@+id/txtISBN"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"/>
-  <Button
-      android:id="@+id/btnTomarPrestado"
-      android:layout_width="wrap_content"
+  <androidx.appcompat.widget.Toolbar
+      android:id="@+id/toolbar"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Tomar Prestado"/>
-  <Button
-      android:id="@+id/btnDevolver"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Devolver"/>
-  <TextView
-      android:id="@+id/tvMensajePrestamo"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Logéase para realizar préstamos"/>
+      android:background="?attr/colorPrimary"
+      android:minHeight="?attr/actionBarSize"
+      android:theme="?attr/actionBarTheme"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
 
+  <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="296dp"
+      android:orientation="vertical"
+      android:gravity="center"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+    <TextView
+        android:id="@+id/txtTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/txtISBN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnTomarPrestado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tomar Prestado" />
+
+    <Button
+        android:id="@+id/btnDevolver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Devolver" />
+
+    <TextView
+        android:id="@+id/tvMensajePrestamo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logéase para realizar préstamos" />
   </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

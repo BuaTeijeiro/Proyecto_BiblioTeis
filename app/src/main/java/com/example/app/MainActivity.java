@@ -2,21 +2,30 @@ package com.example.app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MenuProvider;
 
 import com.example.app.API.models.User;
 
 
-public class MainActivity extends PlantillaActivity {
+public class MainActivity extends ResumableActivity{
 
     Button btnListLibrons;
-    Button btnLogin, btnLogOut, btnPerfil;
+    Button btnPerfil;
     TextView tvBienvenida;
+    Toolbar toolbar;
     UserLogIn userLogIn = new UserLogIn();
+    MyMenuProvider myMenuProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,19 +34,15 @@ public class MainActivity extends PlantillaActivity {
 
         inicializarViews();
 
+        setSupportActionBar(toolbar);
+
+        myMenuProvider = new MyMenuProvider(this);
+
+        addMenuProvider(myMenuProvider);
+
         btnListLibrons.setOnClickListener(v -> {
             Intent i = new Intent(v.getContext(), BookListActivity.class);
             startActivity(i);
-        });
-
-        btnLogin.setOnClickListener(v -> {
-            Intent i = new Intent(v.getContext(), LogInActivity.class);
-            startActivity(i);
-        });
-
-        btnLogOut.setOnClickListener(v ->{
-            userLogIn.setLoggedUser(null);
-            onResume();
         });
 
         btnPerfil.setOnClickListener(v->{
@@ -49,8 +54,7 @@ public class MainActivity extends PlantillaActivity {
 
     private void inicializarViews() {
         btnListLibrons = findViewById(R.id.btnListaLibros);
-        btnLogin = findViewById(R.id.btnLogin);
-        btnLogOut = findViewById(R.id.btnLogOut);
+        toolbar = findViewById(R.id.toolbar);
         tvBienvenida = findViewById(R.id.tvBienvenida);
         btnPerfil = findViewById(R.id.btnPerfil);
     }
@@ -58,17 +62,18 @@ public class MainActivity extends PlantillaActivity {
     @Override
     protected void onResume(){
         super.onResume();
+        myMenuProvider.onPrepareMenu(toolbar.getMenu());
         User usuario;
         if ((usuario = userLogIn.getLoggedUser())!=null){
-            btnLogin.setVisibility(View.GONE);
-            btnLogOut.setVisibility(View.VISIBLE);
+            //toolbar.getMenu().getItem(1).setVisible(false);
+            //toolbar.getMenu().getItem(2).setVisible(true);
             btnPerfil.setVisibility(View.VISIBLE);
             tvBienvenida.setVisibility(View.VISIBLE);
             tvBienvenida.setText("Bienvenido " + usuario.getName());
         } else {
-            btnLogin.setVisibility(View.VISIBLE);
+            //toolbar.getMenu().getItem(1).setVisible(true);
+            //toolbar.getMenu().getItem(2).setVisible(false);
             btnPerfil.setVisibility(View.GONE);
-            btnLogOut.setVisibility(View.GONE);
             tvBienvenida.setVisibility(View.GONE);
         }
     }
