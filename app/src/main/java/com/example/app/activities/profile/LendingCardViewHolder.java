@@ -1,9 +1,11 @@
-package com.example.app;
+package com.example.app.activities.profile;
 
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.app.R;
 
 public class LendingCardViewHolder extends RecyclerView.ViewHolder {
 

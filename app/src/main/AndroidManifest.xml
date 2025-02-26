@@ -20,22 +20,22 @@
         android:theme="@style/Theme.App"
         tools:targetApi="31">
         <activity
-            android:name=".QRActivity"
+            android:name=".activities.QRActivity"
             android:exported="false" />
         <activity
-            android:name=".ProfileActivity"
+            android:name=".activities.profile.ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".LogInActivity"
+            android:name=".activities.LogInActivity"
             android:exported="false" />
         <activity
-            android:name=".BookDetailActivity"
+            android:name=".activities.BookDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".BookListActivity"
+            android:name=".activities.booklist.BookListActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

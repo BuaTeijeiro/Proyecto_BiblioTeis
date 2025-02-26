@@ -1,7 +1,5 @@
-package com.example.app;
+package com.example.app.activities;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.app.API.models.User;
 import com.example.app.API.repository.BookRepository;
 import com.example.app.API.repository.UserRepository;
+import com.example.app.R;
+import com.example.app.utils.UserLogIn;
 
 public class LogInActivity extends AppCompatActivity {
 

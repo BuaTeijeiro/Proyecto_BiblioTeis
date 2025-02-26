@@ -1,4 +1,4 @@
-package com.example.app;
+package com.example.app.activities.booklist;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.app.API.models.Book;
 import com.example.app.API.repository.BookRepository;
 import com.example.app.API.repository.ImageRepository;
+import com.example.app.R;
+import com.example.app.activities.BookDetailActivity;
 
 import java.util.List;
 

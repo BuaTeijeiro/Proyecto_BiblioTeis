@@ -1,10 +1,12 @@
-package com.example.app;
+package com.example.app.activities.booklist;
 
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.app.R;
 
 public class BookCardViewHolder extends RecyclerView.ViewHolder {
 

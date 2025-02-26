@@ -1,4 +1,4 @@
-package com.example.app;
+package com.example.app.utils;
 
 import com.example.app.API.models.User;
 

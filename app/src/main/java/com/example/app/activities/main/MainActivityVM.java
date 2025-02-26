@@ -1,4 +1,4 @@
-package com.example.app;
+package com.example.app.activities.main;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

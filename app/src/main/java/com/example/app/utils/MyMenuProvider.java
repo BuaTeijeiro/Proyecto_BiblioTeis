@@ -1,4 +1,4 @@
-package com.example.app;
+package com.example.app.utils;
 
 import android.content.Intent;
 import android.view.Menu;
@@ -7,6 +7,10 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.core.view.MenuProvider;
+
+import com.example.app.activities.LogInActivity;
+import com.example.app.activities.QRActivity;
+import com.example.app.R;
 
 public class MyMenuProvider  implements MenuProvider {
 

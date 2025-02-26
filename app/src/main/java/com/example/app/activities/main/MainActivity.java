@@ -1,24 +1,23 @@
-package com.example.app;
+package com.example.app.activities.main;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.MenuProvider;
 
 import com.example.app.API.models.User;
+import com.example.app.R;
+import com.example.app.activities.booklist.BookListActivity;
+import com.example.app.activities.profile.ProfileActivity;
+import com.example.app.utils.MyMenuProvider;
+import com.example.app.utils.ResumableActivity;
+import com.example.app.utils.UserLogIn;
 
 
-public class MainActivity extends ResumableActivity{
+public class MainActivity extends ResumableActivity {
 
     Button btnListLibrons;
     Button btnPerfil;

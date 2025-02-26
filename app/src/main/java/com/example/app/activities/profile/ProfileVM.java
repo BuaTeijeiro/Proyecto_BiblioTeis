@@ -1,9 +1,8 @@
-package com.example.app;
+package com.example.app.activities.profile;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.app.API.models.Book;
 import com.example.app.API.models.BookLending;
 
 import java.util.List;

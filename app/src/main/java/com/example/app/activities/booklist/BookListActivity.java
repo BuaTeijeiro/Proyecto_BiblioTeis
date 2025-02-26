@@ -1,11 +1,6 @@
-package com.example.app;
+package com.example.app.activities.booklist;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -19,6 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app.API.models.Book;
 import com.example.app.API.repository.BookRepository;
+import com.example.app.activities.main.MainActivityVM;
+import com.example.app.R;
+import com.example.app.utils.MyMenuProvider;
+import com.example.app.utils.ResumableActivity;
 
 
 import java.util.List;

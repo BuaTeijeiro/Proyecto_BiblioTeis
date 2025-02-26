@@ -1,7 +1,5 @@
-package com.example.app;
+package com.example.app.activities.profile;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.app.API.models.Book;
 import com.example.app.API.models.BookLending;
 import com.example.app.API.repository.BookRepository;
+import com.example.app.R;
 
 import java.util.List;
 

@@ -1,28 +1,23 @@
-package com.example.app;
+package com.example.app.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.MenuProvider;
 
 import com.example.app.API.models.Book;
 import com.example.app.API.models.BookLending;
-import com.example.app.API.models.User;
 import com.example.app.API.repository.BookLendingRepository;
 import com.example.app.API.repository.BookRepository;
+import com.example.app.activities.booklist.BookListAdapter;
+import com.example.app.R;
 import com.example.app.dto.BookLendingForm;
-
-import java.time.LocalDateTime;
+import com.example.app.utils.MyMenuProvider;
+import com.example.app.utils.ResumableActivity;
+import com.example.app.utils.UserLogIn;
 
 public class BookDetailActivity extends ResumableActivity {
 
