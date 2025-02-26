@@ -62,17 +62,13 @@ public class MainActivity extends ResumableActivity{
     @Override
     protected void onResume(){
         super.onResume();
-        myMenuProvider.onPrepareMenu(toolbar.getMenu());
-        User usuario;
-        if ((usuario = userLogIn.getLoggedUser())!=null){
-            //toolbar.getMenu().getItem(1).setVisible(false);
-            //toolbar.getMenu().getItem(2).setVisible(true);
+        User usuario = userLogIn.getLoggedUser();
+        invalidateMenu();
+        if (usuario!=null){
             btnPerfil.setVisibility(View.VISIBLE);
             tvBienvenida.setVisibility(View.VISIBLE);
             tvBienvenida.setText("Bienvenido " + usuario.getName());
         } else {
-            //toolbar.getMenu().getItem(1).setVisible(true);
-            //toolbar.getMenu().getItem(2).setVisible(false);
             btnPerfil.setVisibility(View.GONE);
             tvBienvenida.setVisibility(View.GONE);
         }

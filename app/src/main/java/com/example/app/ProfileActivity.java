@@ -34,7 +34,6 @@ public class ProfileActivity extends ResumableActivity {
     UserLogIn userLogIn = new UserLogIn();
     RecyclerView rvBookLendingList;
     User user;
-    BookLendingRepository bookLendingRepository = new BookLendingRepository();
     ProfileVM viewModel;
     Toolbar toolbar;
 
@@ -63,11 +62,10 @@ public class ProfileActivity extends ResumableActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Toast.makeText(ProfileActivity.this, "Fallo", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProfileActivity.this, "Error al cargar al usuario", Toast.LENGTH_LONG).show();
+                finish();
             }
         });
-
-
     }
 
     private void setUser(User userToLoad){
@@ -76,17 +74,7 @@ public class ProfileActivity extends ResumableActivity {
             tvNombreUsuario.setText(userToLoad.getName());
             tvEmailUsuario.setText(userToLoad.getEmail());
             tvFechaUsuario.setText(userToLoad.getDateJoined());
-
-            bookLendingRepository.getAllLendings(new BookRepository.ApiCallback<List<BookLending>>() {
-                @Override
-                public void onSuccess(List<BookLending> result) {
-                    List<BookLending> lendingsUser = result.stream().filter(o -> o.getUserId() == user.getId()).sorted(Comparator.reverseOrder()).collect(Collectors.toList());
-                    viewModel.lendings.setValue(lendingsUser);
-                }
-                @Override
-                public void onFailure(Throwable t) {
-                }
-            });
+            viewModel.lendings.setValue(user.getBookLendings().stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList()));
         }
     }
 

@@ -49,7 +49,7 @@ public class MyMenuProvider  implements MenuProvider {
             menu.findItem(R.id.logout).setVisible(false);
         } else {
             menu.findItem(R.id.login).setVisible(false);
-            menu.findItem(R.id.login).setVisible(true);
+            menu.findItem(R.id.logout).setVisible(true);
         }
     }
 

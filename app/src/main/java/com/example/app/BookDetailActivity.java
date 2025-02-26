@@ -22,6 +22,8 @@ import com.example.app.API.repository.BookLendingRepository;
 import com.example.app.API.repository.BookRepository;
 import com.example.app.dto.BookLendingForm;
 
+import java.time.LocalDateTime;
+
 public class BookDetailActivity extends ResumableActivity {
 
     TextView txtTitulo;
@@ -42,23 +44,24 @@ public class BookDetailActivity extends ResumableActivity {
         setSupportActionBar(toolbar);
         addMenuProvider(new MyMenuProvider(this));
 
-        Intent i = getIntent();
-        int id = i.getIntExtra(BookListAdapter.ID_LIBRO, 0);
-
+        int id = getIntent().getIntExtra(BookListAdapter.ID_LIBRO, 0);
         searchBook(id);
 
         BookLendingRepository bookLendingRepository = new BookLendingRepository();
-
         btnTomarPrestado.setOnClickListener( v -> {
             BookLendingForm bookLendingForm = new BookLendingForm(book.getId(), userLogIn.getLoggedUser().getId());
             bookLendingRepository.lendBook(bookLendingForm, new BookRepository.ApiCallback<Boolean>() {
                 @Override
                 public void onSuccess(Boolean result) {
                     if (result){
-                        searchBook(book.getId());
+                        book.setAvailable(false);
+                        BookLending bookLending = new BookLending();
+                        bookLending.setUserId(userLogIn.getLoggedUser().getId());
+                        book.getBookLendings().add(bookLending);
                     } else {
-                        Toast.makeText(BookDetailActivity.this, "La API ha devuelto false", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(BookDetailActivity.this, "No se ha podido reservar el libro", Toast.LENGTH_SHORT).show();
                     }
+                    reloadViews();
                 }
 
                 @Override
@@ -73,8 +76,12 @@ public class BookDetailActivity extends ResumableActivity {
                 @Override
                 public void onSuccess(Boolean result) {
                     if (result){
-                        searchBook(book.getId());
+                        book.getCurrentLending().setLendDate("hoy");
+                        book.setAvailable(true);
+                    } else {
+                        Toast.makeText(BookDetailActivity.this, "No se ha podido devolver el libro", Toast.LENGTH_SHORT).show();
                     }
+                    reloadViews();
                 }
 
                 @Override
@@ -104,13 +111,11 @@ public class BookDetailActivity extends ResumableActivity {
 
     private void searchBook(int id) {
         BookRepository bookRepository = new BookRepository();
-
         bookRepository.getBookById(id, new BookRepository.ApiCallback<Book>() {
             @Override
             public void onSuccess(Book result) {
                 setBook(result);
             }
-
             @Override
             public void onFailure(Throwable t) {
                 Toast.makeText(BookDetailActivity.this, "No se ha podido cargar el libro", Toast.LENGTH_SHORT).show();
@@ -145,8 +150,9 @@ public class BookDetailActivity extends ResumableActivity {
     }
 
     @Override
-    protected void onResume(){
+    public void resume(){
         super.onResume();
-        reloadViews();
+        invalidateMenu();
+        inicializarViews();
     }
 }
