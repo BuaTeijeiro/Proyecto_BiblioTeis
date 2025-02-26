@@ -66,9 +66,9 @@ public class ProfileActivity extends ResumableActivity {
     private void setUser(User userToLoad){
         if (userToLoad != null) {
             user = userToLoad;
-            tvNombreUsuario.setText(userToLoad.getName());
-            tvEmailUsuario.setText(userToLoad.getEmail());
-            tvFechaUsuario.setText(userToLoad.getDateJoined());
+            tvNombreUsuario.setText(getString(R.string.nombre_usuario,userToLoad.getName()));
+            tvEmailUsuario.setText(getString(R.string.email_usuario,userToLoad.getEmail()));
+            tvFechaUsuario.setText(getString(R.string.fecha_de_registro_usuario,userToLoad.getDateJoined().substring(0,10)));
             viewModel.lendings.setValue(user.getBookLendings().stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList()));
         }
     }

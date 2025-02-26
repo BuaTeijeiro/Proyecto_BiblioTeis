@@ -1,5 +1,18 @@
 <resources>
-    <string name="app_name">App</string>
+    <string name="app_name">BiblioTeis</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nombre_usuario">Nombre: %s</string>
+    <string name="email_usuario">Email: %s</string>
+    <string name="fecha_de_registro_usuario">Fecha de Registro: %s</string>
+    <string name="listado_hist_rico_de_prestamos">Listado Histórico de Préstamos</string>
+    <string name="bienvenidos">Bienvenido a la Biblioteca del IES de Teis%s</string>
+    <string name="sugerancia">Si no sabes que leer, te sugerimos...</string>
+    <string name="no_book_message">No tenemos ningún libro disponible ahora mismo, pero no dude en consultar la lista para ver cuando será devuelto el libro de su interés</string>
+    <string name="titulo_prestamo">Titulo: %s</string>
+    <string name="fecha_prestamo">Fecha Préstamo: %s</string>
+    <string name="titulo_libro">Título: %s</string>
+    <string name="autor_libro">Autor: %s</string>
+    <string name="isbn_libro">ISBN: %s</string>
+    <string name="fecha_publicacion_libro">Fecha Publicación: %s</string>
 </resources>

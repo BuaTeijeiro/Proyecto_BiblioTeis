@@ -33,7 +33,7 @@ public class LendingListAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         LendingCardViewHolder viewHolder = (LendingCardViewHolder) holder;
         BookLending lending = lendings.get(position);
-        viewHolder.getTxtFechaPrestado().setText(lending.getDateString(lending.getLendDate()));
+        viewHolder.getTxtFechaPrestado().setText("Fecha Préstamo: " + lending.getDateString(lending.getLendDate()));
         if (lending.getReturnDate() == null) {
             if (lending.isLate()){
                 viewHolder.getTxtDevolucion().setText("El libro tendría que haber sido devuelto en la fecha " + lending.getDueDate());
@@ -50,7 +50,7 @@ public class LendingListAdapter extends RecyclerView.Adapter {
         bookRepository.getBookById(lending.getBookId(), new BookRepository.ApiCallback<Book>() {
             @Override
             public void onSuccess(Book result) {
-                viewHolder.getTxtTituloLibro().setText(result.getTitle());
+                viewHolder.getTxtTituloLibro().setText("Título: " + result.getTitle());
             }
 
             @Override

@@ -51,7 +51,7 @@ public class BookListAdapter extends RecyclerView.Adapter {
                     Bitmap bitmap = BitmapFactory.decodeStream(result.byteStream());
                     viewHolder.getImgLibro().setImageBitmap(bitmap);
                 } else{
-                    viewHolder.getImgLibro().setImageResource(R.drawable.not_found);
+                    viewHolder.getImgLibro().setImageResource(R.drawable.book);
                 }
             }
 

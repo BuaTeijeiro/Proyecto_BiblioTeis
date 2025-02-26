@@ -19,26 +19,81 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
 
-  <LinearLayout
+
+  <TextView
+      android:id="@+id/tvTitulo"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="296dp"
-      android:orientation="vertical"
-      android:gravity="center"
-      app:layout_constraintBottom_toBottomOf="parent"
+      android:layout_marginTop="20dp"
+      android:text="Detalle del Libro"
+      android:textSize="@dimen/titlesize"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/toolbar">
+      app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+  <ImageView
+      android:id="@+id/imageDetalle"
+      android:layout_width="259dp"
+      android:layout_height="206dp"
+      android:padding="10dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/tvTitulo"
+      app:srcCompat="@drawable/book" />
+
+  <LinearLayout
+      android:id="@+id/linearLayout2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="200dp"
+      android:gravity="center"
+      android:orientation="vertical"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/imageDetalle">
 
     <TextView
         android:id="@+id/txtTitulo"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/titulo_libro"
+        android:textSize="@dimen/text_size_profile"/>
+
+    <TextView
+        android:id="@+id/txtAutor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/autor_libro"
+        android:textSize="@dimen/text_size_profile"/>
 
     <TextView
         android:id="@+id/txtISBN"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/isbn_libro"
+        android:textSize="@dimen/text_size_profile"/>
+
+    <TextView
+        android:id="@+id/txtFechaPublicacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/fecha_publicacion_libro"
+        android:textSize="@dimen/text_size_profile"/>
+  </LinearLayout>
+
+  <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:gravity="center_horizontal"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
     <Button
         android:id="@+id/btnTomarPrestado"
@@ -56,7 +111,10 @@
         android:id="@+id/tvMensajePrestamo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:padding="15dp"
         android:text="Logéase para realizar préstamos" />
   </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

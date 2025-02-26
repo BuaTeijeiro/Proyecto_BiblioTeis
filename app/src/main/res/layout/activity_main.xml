@@ -19,31 +19,80 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvBienvenida"
+        android:id="@+id/tvSaludo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/btnPerfil"
+        android:layout_marginTop="36dp"
+        android:padding="20dp"
+        android:gravity="center_horizontal"
+        android:text="@string/bienvenidos"
+        android:textSize="@dimen/titlesize"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-    <Button
-        android:id="@+id/btnPerfil"
+    <TextView
+        android:id="@+id/tvRecomendacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ver Perfil"
-        app:layout_constraintBottom_toTopOf="@+id/btnListaLibros"
+        android:layout_marginTop="16dp"
+        android:padding="15dp"
+        android:gravity="center_horizontal"
+        android:text="@string/sugerancia"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.258"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSaludo" />
 
-    <Button
-        android:id="@+id/btnListaLibros"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="206dp"
+        android:layout_height="167dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvRecomendacion"
+        app:srcCompat="@drawable/not_found" />
+
+
+    <TextView
+        android:id="@+id/tvNombreRecomendacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Consultar Libros"
+        android:layout_marginTop="32dp"
+        android:text="Título"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tvNombreRecomendacion"
+        app:layout_constraintVertical_bias="0.293">
 
+        <Button
+            android:id="@+id/btnPerfil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Ver Perfil" />
+
+        <Button
+            android:id="@+id/btnListaLibros"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Consultar Libros"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

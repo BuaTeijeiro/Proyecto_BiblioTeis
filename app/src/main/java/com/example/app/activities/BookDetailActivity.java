@@ -1,8 +1,12 @@
 package com.example.app.activities;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,6 +16,7 @@ import com.example.app.API.models.Book;
 import com.example.app.API.models.BookLending;
 import com.example.app.API.repository.BookLendingRepository;
 import com.example.app.API.repository.BookRepository;
+import com.example.app.API.repository.ImageRepository;
 import com.example.app.activities.booklist.BookListAdapter;
 import com.example.app.R;
 import com.example.app.dto.BookLendingForm;
@@ -19,11 +24,13 @@ import com.example.app.utils.MyMenuProvider;
 import com.example.app.utils.ResumableActivity;
 import com.example.app.utils.UserLogIn;
 
+import okhttp3.ResponseBody;
+
 public class BookDetailActivity extends ResumableActivity {
 
-    TextView txtTitulo;
-    TextView txtISBN;
+    TextView txtTitulo, txtISBN, txtAutor, txtFechaPublicacion;
     TextView tvMensajePrestamo;
+    ImageView imageDetalle;
     Button btnTomarPrestado, btnDevolver;
     UserLogIn userLogIn = new UserLogIn();
     Book book;
@@ -91,6 +98,9 @@ public class BookDetailActivity extends ResumableActivity {
     public void inicializarViews(){
         txtTitulo = findViewById(R.id.txtTitulo);
         txtISBN = findViewById(R.id.txtISBN);
+        txtAutor = findViewById(R.id.txtAutor);
+        txtFechaPublicacion = findViewById(R.id.txtFechaPublicacion);
+        imageDetalle = findViewById(R.id.imageDetalle);
         btnDevolver = findViewById(R.id.btnDevolver);
         btnTomarPrestado = findViewById(R.id.btnTomarPrestado);
         tvMensajePrestamo = findViewById(R.id.tvMensajePrestamo);
@@ -99,8 +109,27 @@ public class BookDetailActivity extends ResumableActivity {
 
     public void setBook(Book book){
         this.book = book;
-        txtTitulo.setText(book.getTitle());
-        txtISBN.setText(book.getIsbn());
+        txtTitulo.setText(getString(R.string.titulo_libro, book.getTitle()));
+        txtAutor.setText(getString(R.string.autor_libro, book.getAuthor()));
+        txtFechaPublicacion.setText(getString(R.string.fecha_publicacion_libro, book.getPublishedDate().substring(0,10)));
+        txtISBN.setText(getString(R.string.isbn_libro, book.getIsbn()));
+        ImageRepository imageRepository = new ImageRepository();
+        imageRepository.getImage(book.getBookPicture(), new BookRepository.ApiCallback<ResponseBody>() {
+            @Override
+            public void onSuccess(ResponseBody result) {
+                if (result != null) {
+                    Bitmap bitmap = BitmapFactory.decodeStream(result.byteStream());
+                    imageDetalle.setImageBitmap(bitmap);
+                } else {
+                    imageDetalle.setImageResource(R.drawable.book);
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                imageDetalle.setImageResource(R.drawable.book);
+            }
+        });
         reloadViews();
     }
 
@@ -145,9 +174,11 @@ public class BookDetailActivity extends ResumableActivity {
     }
 
     @Override
-    public void resume(){
+    public void onResume(){
         super.onResume();
         invalidateMenu();
-        inicializarViews();
+        if (book!=null) {
+            reloadViews();
+        }
     }
 }

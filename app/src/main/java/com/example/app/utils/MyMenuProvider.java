@@ -37,6 +37,7 @@ public class MyMenuProvider  implements MenuProvider {
         }
         if (id == R.id.btnQR){
             activity.startActivity(new Intent(activity, QRActivity.class));
+            return true;
         }
         if (id == R.id.logout){
             userLogIn.setLoggedUser(null);

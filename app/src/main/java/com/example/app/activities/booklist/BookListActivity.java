@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app.API.models.Book;
 import com.example.app.API.repository.BookRepository;
-import com.example.app.activities.main.MainActivityVM;
 import com.example.app.R;
 import com.example.app.utils.MyMenuProvider;
 import com.example.app.utils.ResumableActivity;
@@ -29,7 +28,6 @@ public class BookListActivity extends ResumableActivity {
     TextView txtView;
     EditText etBuscador;
     Button btnBuscar;
-    ImageButton btnCamara;
     Toolbar toolbar;
 
     @Override
@@ -42,7 +40,7 @@ public class BookListActivity extends ResumableActivity {
         setSupportActionBar(toolbar);
         addMenuProvider(new MyMenuProvider(this));
 
-        MainActivityVM viewModel = new ViewModelProvider(this).get(MainActivityVM.class);
+        BookListActivityVM viewModel = new ViewModelProvider(this).get(BookListActivityVM.class);
 
         rv.setLayoutManager(new LinearLayoutManager(this));
         viewModel.books.observe(this, (List<Book> books) -> {
@@ -54,7 +52,7 @@ public class BookListActivity extends ResumableActivity {
             @Override
             public void onSuccess(List<Book> result) {
                 viewModel.books.setValue(result);
-                txtView.setText(String.format("Listado de libros. Total: %d libro(s)", result.size()));
+                txtView.setText(String.format("Total recuperado: %d libro(s)", result.size()));
             }
 
             @Override
@@ -65,7 +63,7 @@ public class BookListActivity extends ResumableActivity {
 
         btnBuscar.setOnClickListener(v -> {
             String criterioBusqueda = etBuscador.getText().toString();
-            rv.setAdapter(new BookListAdapter(viewModel.books.getValue().stream().filter(o -> o.getTitle().contains(criterioBusqueda) || o.getAuthor().contains(criterioBusqueda)).collect(Collectors.toList())));
+            rv.setAdapter(new BookListAdapter(viewModel.books.getValue().stream().filter(o -> o.getTitle().toLowerCase().contains(criterioBusqueda.toLowerCase()) || o.getAuthor().toLowerCase().contains(criterioBusqueda.toLowerCase())).collect(Collectors.toList())));
         });
 
     }

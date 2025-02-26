@@ -11,16 +11,16 @@
         android:id="@+id/txtTituloLibro"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hola"/>
+        android:text="@string/titulo_prestamo"/>
     <TextView
         android:id="@+id/txtFechaPrestado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Adiós"/>
+        android:text="@string/fecha_prestamo"/>
     <TextView
         android:id="@+id/txtDevolucion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Fecha Prueba"/>
+        android:text="Devolución"/>
 
 </LinearLayout>
