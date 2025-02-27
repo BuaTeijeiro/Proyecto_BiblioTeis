@@ -21,7 +21,7 @@ import java.util.List;
 import okhttp3.ResponseBody;
 
 public class BookListAdapter extends RecyclerView.Adapter {
-    public static final String ID_LIBRO = "idLibro";
+
     List<Book> books;
     ImageRepository imageRepository = new ImageRepository();
 
@@ -43,7 +43,7 @@ public class BookListAdapter extends RecyclerView.Adapter {
         Book book = books.get(position);
         viewHolder.getTxtTitulo().setText(book.getTitle());
         viewHolder.getTxtAutor().setText(book.getAuthor());
-        viewHolder.getTxtFechaPublicacion().setText(book.getPublishedDate());
+        viewHolder.getTxtFechaPublicacion().setText(book.getPublishedDate().substring(0,10));
         imageRepository.getImage(book.getBookPicture(), new BookRepository.ApiCallback<ResponseBody>() {
             @Override
             public void onSuccess(ResponseBody result) {
@@ -62,7 +62,7 @@ public class BookListAdapter extends RecyclerView.Adapter {
         });
         viewHolder.getView().setOnClickListener(v ->{
             Intent i = new Intent(v.getContext(), BookDetailActivity.class);
-            i.putExtra(ID_LIBRO, book.getId());
+            i.putExtra(BookDetailActivity.ID_LIBRO, book.getId());
             v.getContext().startActivity(i);
         });
     }

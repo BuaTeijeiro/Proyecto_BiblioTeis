@@ -7,6 +7,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.app.R;
+import com.example.app.activities.booklist.BookListAdapter;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -34,7 +35,9 @@ public class QRActivity extends AppCompatActivity {
             if (result.getContents() == null) {
                 Toast.makeText(this, "Scan cancelled", Toast.LENGTH_LONG).show();
             } else {
-                Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+                Intent i = new Intent(this, BookDetailActivity.class);
+                i.putExtra(BookDetailActivity.ID_LIBRO, Integer.parseInt(result.getContents()));
+                startActivity(i);
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);

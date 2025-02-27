@@ -43,6 +43,10 @@ public class MainActivity extends ResumableActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        userLogIn.initialize(this);
+        userLogIn.getMutableData().observe(this, usuario -> {
+            setViewsIfUser();
+        });
 
         inicializarViews();
 
@@ -63,6 +67,7 @@ public class MainActivity extends ResumableActivity {
         });
 
         searchRecommendation();
+        setViewsIfUser();
 
     }
 
@@ -129,9 +134,7 @@ public class MainActivity extends ResumableActivity {
         tvRecomendacion = findViewById(R.id.tvRecomendacion);
     }
 
-    @Override
-    protected void onResume(){
-        super.onResume();
+    public void setViewsIfUser(){
         User usuario = userLogIn.getLoggedUser();
         invalidateMenu();
         if (usuario!=null){
@@ -143,5 +146,11 @@ public class MainActivity extends ResumableActivity {
             tvSaludo.setText(getString(R.string.bienvenidos, ""));
         }
         searchRecommendation();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        setViewsIfUser();
     }
 }

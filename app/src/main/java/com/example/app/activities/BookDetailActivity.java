@@ -27,7 +27,7 @@ import com.example.app.utils.UserLogIn;
 import okhttp3.ResponseBody;
 
 public class BookDetailActivity extends ResumableActivity {
-
+    public static final String ID_LIBRO = "idLibro";
     TextView txtTitulo, txtISBN, txtAutor, txtFechaPublicacion;
     TextView tvMensajePrestamo;
     ImageView imageDetalle;
@@ -46,7 +46,7 @@ public class BookDetailActivity extends ResumableActivity {
         setSupportActionBar(toolbar);
         addMenuProvider(new MyMenuProvider(this));
 
-        int id = getIntent().getIntExtra(BookListAdapter.ID_LIBRO, 0);
+        int id = getIntent().getIntExtra(ID_LIBRO, 0);
         searchBook(id);
 
         BookLendingRepository bookLendingRepository = new BookLendingRepository();

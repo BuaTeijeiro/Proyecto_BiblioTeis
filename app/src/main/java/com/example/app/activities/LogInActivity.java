@@ -1,11 +1,14 @@
 package com.example.app.activities;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.security.crypto.EncryptedSharedPreferences;
+import androidx.security.crypto.MasterKey;
 
 import com.example.app.API.models.User;
 import com.example.app.API.repository.BookRepository;
@@ -13,10 +16,14 @@ import com.example.app.API.repository.UserRepository;
 import com.example.app.R;
 import com.example.app.utils.UserLogIn;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
+
 public class LogInActivity extends AppCompatActivity {
 
     EditText etEmail, etPassword;
     Button btnLogin, btnCancelarLogin;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +45,7 @@ public class LogInActivity extends AppCompatActivity {
                             etPassword.setText("");
                         } else {
                             UserLogIn userLogIn = new UserLogIn();
-                            userLogIn.setLoggedUser(result);
+                            userLogIn.loggearUsuario(result);
                             finish();
                         }
                     }

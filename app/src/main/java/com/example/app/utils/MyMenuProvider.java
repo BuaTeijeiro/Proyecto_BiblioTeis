@@ -33,6 +33,7 @@ public class MyMenuProvider  implements MenuProvider {
         if (id == R.id.login){
             Intent i = new Intent(activity, LogInActivity.class);
             activity.startActivity(i);
+            activity.resume();
             return true;
         }
         if (id == R.id.btnQR){
@@ -40,7 +41,7 @@ public class MyMenuProvider  implements MenuProvider {
             return true;
         }
         if (id == R.id.logout){
-            userLogIn.setLoggedUser(null);
+            userLogIn.logout();
             activity.resume();
             return true;
         }
