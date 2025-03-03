@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class BookLending implements Comparable<BookLending>{
-    public static final int LENDING_PERIOD = 2;
+    public static final int LENDING_PERIOD = 15;
     private int id;
     private int bookId;
     private int userId;
